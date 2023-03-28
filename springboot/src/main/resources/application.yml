@@ -1,0 +1,35 @@
+server:
+    port: 8090
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/wyx?serverTimezone=GMT%2b8
+    username: root
+    password: 1234
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  application:
+    name: springfox-swagger
+
+mybatis:
+    mapper-locations: classpath:mapper/*.xml     #扫描所有mybatis的xml文件
+#    configuration:
+#      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+#
+#swagger:
+#  enable: true
+#  application-name: ${spring.application.name}
+#  application-version: 1.0
+#  application-description: springfox swagger 3.0整合Demo
+#  try-host: http://localhost:${server.port}
+
+files:
+  upload:
+    path: E:/app/files/
