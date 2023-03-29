@@ -68,7 +68,20 @@ public class UserController {
     //新增或者更新
     @PostMapping
     public Result save(@RequestBody User user){ //@RequestBody方法是把前台的json对象转成后台的java对象
-        return  Result.success(userService.saveOrUpdate(user));
+       String  username = user.getUsername();
+       if(StrUtil.isBlank(username)){
+           return  Result.error(Constants.CODE_400,"参数错误");
+       }
+       if (user.getId() != null){
+           user.setPassword(null);
+       }else {
+           user.setNickname(user.getUsername());
+           if (user.getPassword() ==null){
+               user.setPassword("123456");
+           }
+       }
+
+        return Result.success(userService.saveOrUpdate(user));
         }
 
     //删除
@@ -91,7 +104,7 @@ public class UserController {
 
     //个人信息
     @GetMapping("/username/{username}")
-    public Result findOne(@PathVariable String username) {
+    public Result findByUsername(@PathVariable String username) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("username", username);
         return  Result.success(userService.getOne(queryWrapper));
@@ -158,7 +171,7 @@ public class UserController {
         writer.addHeaderAlias("phone","电话");
         writer.addHeaderAlias("address","地址");
         writer.addHeaderAlias("createTime","创建时间");
-        writer.addHeaderAlias("avatarUrl","头像");
+        writer.addHeaderAlias("avatar_url","头像");
 
         //一次性自而出list内的对象到excel，使用默认样式，强制输出标题
         writer.write(list,true);
@@ -190,7 +203,7 @@ public class UserController {
         reader.addHeaderAlias("电话","phone");
         reader.addHeaderAlias("地址","address");
         reader.addHeaderAlias("微信","wechat");
-        reader.addHeaderAlias("头像","avatarUrl");
+        reader.addHeaderAlias("头像","avatar_url");
         List<User> list = reader.readAll(User.class);
         userService.saveBatch(list);
         return Result.success(true);

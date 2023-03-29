@@ -6,4 +6,7 @@ public interface Constants {
     String CODE_400  = "400";//参数错误
     String CODE_500  = "500";//系統错误
     String CODE_666  = "666";//其他业务异常
+
+    String DICT_TYPE_ICON = "icon";
+    String FILES_KEY ="FILES_FRONT_ALL";
 }

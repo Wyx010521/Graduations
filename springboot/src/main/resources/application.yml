@@ -7,6 +7,13 @@ spring:
     url: jdbc:mysql://localhost:3306/wyx?serverTimezone=GMT%2b8
     username: root
     password: 1234
+    servlet:
+      multipart:
+        max-file-size: 100MB
+        max-request-size: 100MB
+  redis:
+    host: 127.0.0.1
+    port: 6379
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
@@ -20,7 +27,8 @@ mybatis:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-
+    #在映射实体或者属性时，将数据库中表名和字段名中的下划线去掉，按照驼峰命名法映射
+    map-underscore-to-camel-case: true
 
 #
 #swagger:
@@ -33,3 +41,4 @@ mybatis-plus:
 files:
   upload:
     path: E:/app/files/
+

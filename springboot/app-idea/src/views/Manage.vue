@@ -57,14 +57,18 @@ components:{//注册组件
               this.collapseBtnClass = "el-icon-s-fold"
               this.logoTextShow = true
           }
-      }
+      },
+      // getUser() {
+      //     let username = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")).username : ""
+      //     if (username) {
+      //         // 从后台获取User数据
+      //         this.request.get("/user/username/" + username).then(res => {
+      //             // 重新赋值后台的最新User数据
+      //             this.user = res.data
+      //         })
+      //     }
+      // }
   }
 }
 </script>
 
-<style>
-  .headerBg{
- background: #cccccc !important;
-    color: lightslategrey;
-  }
-</style>

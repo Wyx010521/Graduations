@@ -53,7 +53,7 @@
                             icon="el-icon-info"
                             icon-color="red"
                             title="您确定删除吗？"
-                            @confirm="handleDelet(scope.row.id)"
+                            @confirm="handleDelete(scope.row.id)"
                     >
                         <el-button type="danger" slot="reference">删除 <i class="el-icon-delete"></i></el-button>
                     </el-popconfirm>
@@ -144,7 +144,8 @@
                         address:this.address,
                         email:this.email,
                         phone:this.phone,
-                        nickname:this.nickname
+                        nickname:this.nickname,
+                        avatarUrl: this.avatarUrl
                     }
                 }).then(res =>{
                     this.tableData= res.data.records
@@ -166,8 +167,7 @@
                     }
                 })
             },
-
-            handleDelet(id){//删除方法
+            handleDelete(id){//删除方法
                 this.request.delete("/user/"+id).then( res =>{
                     if(res.data){
                         this.$message.success("删除成功")
@@ -195,9 +195,9 @@
                 })
             },
             handleEdit(row){//编辑方法
-                this.form = row
-                this.dialogFormVisible = true
+                // this.form = row
                 this.form = JSON.parse(JSON.stringify(row))
+                this.dialogFormVisible = true
             },
             reset(){
                 this.username=""
