@@ -1,13 +1,13 @@
 <template>
       <el-container style="min-height: 100vh">
 
-        <el-aside :width="sideWidth + 'px'" style="box-shadow: 2px 0 6px rgb(0 21 41 / 35% );" >
-          <Aside  :iscollapse="isCollapse" :logotextshow="logoTextShow"  />
+        <el-aside  :width="sideWidth + 'px'" style="box-shadow: 2px 0 6px rgb(0 21 41 / 35% );" >
+          <common-aside  :iscollapse="isCollapse" :logotextshow="logoTextShow"  />
         </el-aside>
 
         <el-container>
            <el-header style=" border-bottom:1px solid #ccc;"  >
-                <Header :collapseBtnclass="collapseBtnClass" :collapse="collapse"   />
+                <common-header :collapseBtnclass="collapseBtnClass" :collapse="collapse"   />
           </el-header>
 
           <el-main>
@@ -25,8 +25,8 @@
 </template>
 
 <script>
-  import Aside from "@/components/Aside";
-  import Header from "@/components/Header";
+  import CommonAside from "@/components/CommonAside";
+  import CommonHeader from "@/components/CommonHeader";
 
 export default {
   name:'home',
@@ -42,8 +42,8 @@ export default {
     }
   },
 components:{//注册组件
-    Aside,
-    Header,
+    CommonAside,
+    CommonHeader,
 },
   methods:{
       collapse() {/* 点击收缩按钮触发 */
@@ -71,4 +71,19 @@ components:{//注册组件
   }
 }
 </script>
+<style>
+    .el-menu-item.is-active {
+        background-color: rgb(38, 52, 69) !important;
+    }
+    .el-menu-item:hover {
+        background-color: rgb(38, 52, 69) !important;
+    }
 
+    .el-submenu__title:hover {
+        background-color: rgb(38, 52, 69) !important;
+    }
+    /*解决收缩菜单文字不消失问题*/
+    .el-menu--collapse span {
+        visibility: hidden;
+    }
+</style>
