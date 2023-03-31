@@ -49,27 +49,27 @@
                 // console.log(res)
                 this.form = res
             })
-           //  const username = this.user.username
-           //  if(!username){
-           //      this.$message.error("当前无法获取用户信息")
-           //      return
-           //  }
-           // this.getUser()
+            //  const username = this.user.username
+            //  if(!username){
+            //      this.$message.error("当前无法获取用户信息")
+            //      return
+            //  }
+            // this.getUser()
         },
         methods: {
-          async  getUser(){
-              return (await this.request.get("/user/username/" + this.user.username )).data
+            async getUser() {
+                return (await this.request.get("/user/username/" + this.user.username)).data
             },
             save() {
                 this.request.post("/user", this.form).then(res => {
                     if (res.code === '200') {
                         this.$message.success("保存成功")
                         //更新浏览器存储的用户信息
-                       this.getUser().then(res => {
-                           res.token = JSON.parse(localStorage.getItem("user")).token
-                           localStorage.setItem("user",JSON.stringify(res))
-
-                       })
+                        this.getUser().then(res => {
+                            res.token = JSON.parse(localStorage.getItem("user")).token
+                            localStorage.setItem("user", JSON.stringify(res))
+                            window.location.reload();
+                        })
                     } else {
                         this.$message.error("保存失败")
                     }
@@ -77,7 +77,7 @@
 
             },
             handleAvatarSuccess(res) {
-              //res是文件的路径
+                //res是文件的路径
                 this.form.avatarUrl = res
             }
         }
@@ -85,13 +85,15 @@
 </script>
 
 <style>
-    .avatar-uploader{
+    .avatar-uploader {
         text-align: center;
     }
+
     .avatar-uploader {
         text-align: center;
         padding-bottom: 10px;
     }
+
     .avatar-uploader .el-upload {
         border: 1px dashed #d9d9d9;
         border-radius: 6px;
@@ -99,9 +101,11 @@
         position: relative;
         overflow: hidden;
     }
+
     .avatar-uploader .el-upload:hover {
         border-color: #409EFF;
     }
+
     .avatar-uploader-icon {
         font-size: 28px;
         color: #8c939d;
@@ -110,6 +114,7 @@
         line-height: 138px;
         text-align: center;
     }
+
     .avatar {
         width: 138px;
         height: 138px;
